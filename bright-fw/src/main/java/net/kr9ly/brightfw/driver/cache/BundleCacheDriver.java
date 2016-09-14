@@ -13,7 +13,7 @@ import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
 
-public class BundleCache implements OnCreateCallback, OnSaveInstanceStateCallback {
+public class BundleCacheDriver implements OnCreateCallback, OnSaveInstanceStateCallback {
 
     private final String bundleName;
 
@@ -21,7 +21,7 @@ public class BundleCache implements OnCreateCallback, OnSaveInstanceStateCallbac
 
     private final Subject<String, String> updateQueue = new SerializedSubject<>(PublishSubject.<String>create());
 
-    public BundleCache(BundleCacheSettings settings) {
+    public BundleCacheDriver(BundleCacheSettings settings) {
         this.bundleName = settings.bundleName();
     }
 

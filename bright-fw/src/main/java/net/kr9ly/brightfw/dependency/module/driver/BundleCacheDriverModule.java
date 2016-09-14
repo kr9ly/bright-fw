@@ -1,21 +1,21 @@
-package net.kr9ly.brightfw.dependency.module;
+package net.kr9ly.brightfw.dependency.module.driver;
 
 import net.kr9ly.brightfw.dependency.scope.MainScope;
-import net.kr9ly.brightfw.driver.cache.BundleCache;
+import net.kr9ly.brightfw.driver.cache.BundleCacheDriver;
 import net.kr9ly.brightfw.driver.cache.BundleCacheSettings;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class BundleCacheModule {
+public class BundleCacheDriverModule {
 
     @MainScope
     @Provides
-    BundleCache bundleCache(
+    BundleCacheDriver bundleCacheDriver(
             BundleCacheSettings settings
     ) {
-        return new BundleCache(settings);
+        return new BundleCacheDriver(settings);
     }
 
     @MainScope
