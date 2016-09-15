@@ -1,6 +1,8 @@
 package net.kr9ly.brightfw.app;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
@@ -24,20 +26,25 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
 
     private MainComponent component;
 
+    @NonNull
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
 
-        prepareComponent(savedInstanceState);
+        dialog = prepareComponent(savedInstanceState, dialog);
+
+        return dialog;
     }
 
     @SuppressWarnings("unchecked")
-    private void prepareComponent(Bundle savedInstanceState) {
+    private Dialog prepareComponent(Bundle savedInstanceState, Dialog dialog) {
         BrightApplication<SingletonComponent> application = (BrightApplication<SingletonComponent>) getActivity().getApplication();
         component = buildComponent(application.getComponent());
-        componentCreated(component);
+        dialog = componentCreated(component, dialog);
 
         component.lifecycleController().onCreate(savedInstanceState);
+
+        return dialog;
     }
 
     @Override
@@ -84,5 +91,5 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
 
     protected abstract MainComponent buildComponent(SingletonComponent singletonComponent);
 
-    protected abstract void componentCreated(MainComponent component);
+    protected abstract Dialog componentCreated(MainComponent component, Dialog dialog);
 }
