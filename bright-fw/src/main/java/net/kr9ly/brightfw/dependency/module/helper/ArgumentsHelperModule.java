@@ -1,9 +1,10 @@
 package net.kr9ly.brightfw.dependency.module.helper;
 
+import net.kr9ly.brightfw.dependency.module.helper.arguments.ArgumentsHelperDelegate;
 import net.kr9ly.brightfw.dependency.scope.MainScope;
-import net.kr9ly.brightfw.helper.transition.ArgumentsHelper;
-import net.kr9ly.brightfw.helper.transition.BundleHelper;
-import net.kr9ly.brightfw.helper.transition.IntentHelper;
+import net.kr9ly.brightfw.helper.arguments.ArgumentsHelper;
+import net.kr9ly.brightfw.helper.bundle.BundleHelper;
+import net.kr9ly.brightfw.helper.intent.IntentHelper;
 
 import dagger.Module;
 import dagger.Provides;

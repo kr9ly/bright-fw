@@ -1,8 +1,11 @@
-package net.kr9ly.brightfw.helper.transition;
+package net.kr9ly.brightfw.helper.bundle;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+
+import net.kr9ly.brightfw.helper.arguments.Argument;
+import net.kr9ly.brightfw.helper.arguments.FragmentArguments;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
@@ -12,12 +15,17 @@ import java.lang.reflect.Proxy;
 /* package */ class BundleConverter {
 
     public static Bundle buildBundle(Object arguments) {
-        Class<?> argumentsClass = arguments.getClass();
-        if (!argumentsClass.isInterface()) {
-            throw new RuntimeException("Arguments type Must be interface.");
+        Class<?> argumentsClass = null;
+
+        for (Class<?> cl : arguments.getClass().getInterfaces()) {
+            FragmentArguments info = cl.getAnnotation(FragmentArguments.class);
+            if (info != null) {
+                argumentsClass = cl;
+                break;
+            }
         }
-        FragmentArguments typeInfo = argumentsClass.getAnnotation(FragmentArguments.class);
-        if (typeInfo == null) {
+
+        if (argumentsClass == null) {
             throw new RuntimeException("Arguments interface Must be annotated by FragmentArguments.");
         }
         Bundle bundle = new Bundle();

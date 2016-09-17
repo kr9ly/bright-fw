@@ -1,4 +1,4 @@
-package net.kr9ly.brightfw.helper.transition;
+package net.kr9ly.brightfw.helper.arguments;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

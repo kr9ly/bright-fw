@@ -1,10 +1,15 @@
 package net.kr9ly.brightfw.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
+import net.kr9ly.brightfw.helper.transition.TransitionHelper;
+import net.kr9ly.brightfw.helper.transition.action.ActivityTransitionAction;
+
+import java.io.Serializable;
 
 /**
  * Copyright 2016 kr9ly
@@ -81,6 +86,19 @@ public abstract class BrightActivity<SingletonComponent, MainComponent extends B
         super.onDestroy();
 
         component.lifecycleController().onDestroy();
+    }
+
+    @Override
+    public void finish() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            ActivityTransitionAction action = (ActivityTransitionAction) intent.getSerializableExtra(TransitionHelper.EXTRA_KEY_TRANSITION_ACTION);
+            if (action != null) {
+                action.back(this, intent);
+            }
+        }
+
+        super.finish();
     }
 
     protected abstract MainComponent buildComponent(SingletonComponent singletonComponent);

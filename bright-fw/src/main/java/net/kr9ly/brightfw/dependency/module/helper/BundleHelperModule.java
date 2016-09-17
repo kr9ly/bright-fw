@@ -3,7 +3,7 @@ package net.kr9ly.brightfw.dependency.module.helper;
 import android.content.Context;
 
 import net.kr9ly.brightfw.dependency.scope.SingletonScope;
-import net.kr9ly.brightfw.helper.transition.BundleHelper;
+import net.kr9ly.brightfw.helper.bundle.BundleHelper;
 
 import dagger.Module;
 import dagger.Provides;

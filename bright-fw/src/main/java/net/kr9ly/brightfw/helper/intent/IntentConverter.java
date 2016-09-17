@@ -1,9 +1,12 @@
-package net.kr9ly.brightfw.helper.transition;
+package net.kr9ly.brightfw.helper.intent;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+
+import net.kr9ly.brightfw.helper.arguments.ActivityArguments;
+import net.kr9ly.brightfw.helper.arguments.Argument;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
@@ -13,14 +16,21 @@ import java.lang.reflect.Proxy;
 /* package */ class IntentConverter {
 
     public static Intent buildIntent(Context context, Object arguments) {
-        Class<?> argumentsClass = arguments.getClass();
-        if (!argumentsClass.isInterface()) {
-            throw new RuntimeException("Arguments type Must be interface.");
+        Class<?> argumentsClass = null;
+        ActivityArguments typeInfo = null;
+
+        for (Class<?> cl : arguments.getClass().getInterfaces()) {
+            ActivityArguments info = cl.getAnnotation(ActivityArguments.class);
+            if (info != null) {
+                typeInfo = info;
+                argumentsClass = cl;
+            }
         }
-        ActivityArguments typeInfo = argumentsClass.getAnnotation(ActivityArguments.class);
+
         if (typeInfo == null) {
             throw new RuntimeException("Arguments interface Must be annotated by ActivityArguments.");
         }
+
         Intent intent = new Intent(context, typeInfo.bindTo());
         for (Method method : argumentsClass.getDeclaredMethods()) {
             Argument methodInfo = method.getAnnotation(Argument.class);

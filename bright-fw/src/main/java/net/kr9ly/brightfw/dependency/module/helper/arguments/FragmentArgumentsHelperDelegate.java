@@ -1,11 +1,11 @@
-package net.kr9ly.brightfw.dependency.module.helper;
+package net.kr9ly.brightfw.dependency.module.helper.arguments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
-import net.kr9ly.brightfw.helper.transition.ArgumentsHelper;
-import net.kr9ly.brightfw.helper.transition.BundleHelper;
-import net.kr9ly.brightfw.helper.transition.FragmentArgumentsHelper;
-import net.kr9ly.brightfw.helper.transition.IntentHelper;
+import net.kr9ly.brightfw.helper.arguments.ArgumentsHelper;
+import net.kr9ly.brightfw.helper.bundle.BundleHelper;
+import net.kr9ly.brightfw.helper.arguments.FragmentArgumentsHelper;
+import net.kr9ly.brightfw.helper.intent.IntentHelper;
 
 public class FragmentArgumentsHelperDelegate implements ArgumentsHelperDelegate {
 

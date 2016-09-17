@@ -1,4 +1,4 @@
-package net.kr9ly.brightfw.helper.transition;
+package net.kr9ly.brightfw.helper.bundle;
 
 import android.content.Context;
 import android.os.Bundle;

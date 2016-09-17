@@ -1,4 +1,4 @@
-package net.kr9ly.brightfw.helper.transition;
+package net.kr9ly.brightfw.helper.arguments;
 
 import android.app.Activity;
 

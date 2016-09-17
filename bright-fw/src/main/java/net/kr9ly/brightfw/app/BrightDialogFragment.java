@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
+import net.kr9ly.brightfw.helper.dialog.DialogHelper;
+import net.kr9ly.brightfw.helper.dialog.action.animation.AnimationAction;
 
 /**
  * Copyright 2016 kr9ly
@@ -58,6 +60,11 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
     public void onStart() {
         super.onStart();
 
+        AnimationAction action = (AnimationAction) getArguments().getSerializable(DialogHelper.ARGUMENT_KEY_ANIMATION_ACTION);
+        if (action != null) {
+            action.show(this);
+        }
+
         component.lifecycleController().onStart();
     }
 
@@ -87,6 +94,16 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
         super.onDestroy();
 
         component.lifecycleController().onDestroy();
+    }
+
+    @Override
+    public void dismiss() {
+        AnimationAction action = (AnimationAction) getArguments().getSerializable(DialogHelper.ARGUMENT_KEY_ANIMATION_ACTION);
+        if (action != null) {
+            action.dismiss(this);
+        }
+
+        super.dismiss();
     }
 
     protected abstract MainComponent buildComponent(SingletonComponent singletonComponent);

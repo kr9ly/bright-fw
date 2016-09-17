@@ -1,11 +1,11 @@
-package net.kr9ly.brightfw.dependency.module.helper;
+package net.kr9ly.brightfw.dependency.module.helper.arguments;
 
 import android.app.Activity;
 
-import net.kr9ly.brightfw.helper.transition.ActivityArgumentsHelper;
-import net.kr9ly.brightfw.helper.transition.ArgumentsHelper;
-import net.kr9ly.brightfw.helper.transition.BundleHelper;
-import net.kr9ly.brightfw.helper.transition.IntentHelper;
+import net.kr9ly.brightfw.helper.arguments.ActivityArgumentsHelper;
+import net.kr9ly.brightfw.helper.arguments.ArgumentsHelper;
+import net.kr9ly.brightfw.helper.bundle.BundleHelper;
+import net.kr9ly.brightfw.helper.intent.IntentHelper;
 
 public class ActivityArgumentsHelperDelegate implements ArgumentsHelperDelegate {
 
