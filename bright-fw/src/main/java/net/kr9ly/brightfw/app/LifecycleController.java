@@ -1,33 +1,40 @@
 package net.kr9ly.brightfw.app;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
-import net.kr9ly.brightfw.dependency.lifecycle.OnCreateCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnDestroyCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnPauseCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnResumeCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnSaveInstanceStateCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnStartCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnStopCallback;
+import net.kr9ly.brightfw.app.callback.DispatchKeyEventCallback;
+import net.kr9ly.brightfw.app.callback.OnCreateCallback;
+import net.kr9ly.brightfw.app.callback.OnDestroyCallback;
+import net.kr9ly.brightfw.app.callback.OnPauseCallback;
+import net.kr9ly.brightfw.app.callback.OnRestoreInstanceStateCallback;
+import net.kr9ly.brightfw.app.callback.OnResumeCallback;
+import net.kr9ly.brightfw.app.callback.OnSaveInstanceStateCallback;
+import net.kr9ly.brightfw.app.callback.OnStartCallback;
+import net.kr9ly.brightfw.app.callback.OnStopCallback;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LifecycleController {
 
-    private final List<OnCreateCallback> onCreateCallbacks = new LinkedList<>();
+    private final List<OnCreateCallback> onCreateCallbacks = new ArrayList<>();
 
-    private final List<OnStartCallback> onStartCallbacks = new LinkedList<>();
+    private final List<OnStartCallback> onStartCallbacks = new ArrayList<>();
 
-    private final List<OnResumeCallback> onResumeCallbacks = new LinkedList<>();
+    private final List<OnResumeCallback> onResumeCallbacks = new ArrayList<>();
 
-    private final List<OnPauseCallback> onPauseCallbacks = new LinkedList<>();
+    private final List<OnPauseCallback> onPauseCallbacks = new ArrayList<>();
 
-    private final List<OnStopCallback> onStopCallbacks = new LinkedList<>();
+    private final List<OnStopCallback> onStopCallbacks = new ArrayList<>();
 
-    private final List<OnDestroyCallback> onDestroyCallbacks = new LinkedList<>();
+    private final List<OnDestroyCallback> onDestroyCallbacks = new ArrayList<>();
 
-    private final List<OnSaveInstanceStateCallback> onSaveInstanceStateCallbacks = new LinkedList<>();
+    private final List<OnSaveInstanceStateCallback> onSaveInstanceStateCallbacks = new ArrayList<>();
+
+    private final List<OnRestoreInstanceStateCallback> onRestoreInstanceStateCallbacks = new ArrayList<>();
+
+    private final List<DispatchKeyEventCallback> dispatchKeyEventCallbacks = new ArrayList<>();
 
     public void register(Object callbacks) {
         if (callbacks instanceof OnCreateCallback) {
@@ -50,6 +57,12 @@ public class LifecycleController {
         }
         if (callbacks instanceof OnSaveInstanceStateCallback) {
             onSaveInstanceStateCallbacks.add((OnSaveInstanceStateCallback) callbacks);
+        }
+        if (callbacks instanceof OnRestoreInstanceStateCallback) {
+            onRestoreInstanceStateCallbacks.add((OnRestoreInstanceStateCallback) callbacks);
+        }
+        if (callbacks instanceof DispatchKeyEventCallback) {
+            dispatchKeyEventCallbacks.add((DispatchKeyEventCallback) callbacks);
         }
     }
 
@@ -93,5 +106,19 @@ public class LifecycleController {
         for (OnSaveInstanceStateCallback callback : onSaveInstanceStateCallbacks) {
             callback.onSaveInstanceState(outState);
         }
+    }
+
+    /* package */ void onRestoreInstanceState(Bundle savedInstanceState) {
+        for (OnRestoreInstanceStateCallback callback : onRestoreInstanceStateCallbacks) {
+            callback.onRestoreInstanceState(savedInstanceState);
+        }
+    }
+
+    /* package */ boolean dispatchKeyEvent(KeyEvent event) {
+        boolean handled = false;
+        for (DispatchKeyEventCallback callback : dispatchKeyEventCallbacks) {
+            handled |= callback.dispatchKeyEvent(event);
+        }
+        return handled;
     }
 }

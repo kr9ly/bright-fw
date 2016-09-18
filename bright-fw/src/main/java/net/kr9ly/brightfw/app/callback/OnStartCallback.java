@@ -1,4 +1,4 @@
-package net.kr9ly.brightfw.dependency.lifecycle;
+package net.kr9ly.brightfw.app.callback;
 
 public interface OnStartCallback {
 

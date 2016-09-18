@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
 import net.kr9ly.brightfw.helper.transition.TransitionHelper;
 import net.kr9ly.brightfw.helper.transition.action.ActivityTransitionAction;
-
-import java.io.Serializable;
 
 /**
  * Copyright 2016 kr9ly
@@ -54,6 +53,13 @@ public abstract class BrightActivity<SingletonComponent, MainComponent extends B
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        component.lifecycleController().onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 
@@ -86,6 +92,11 @@ public abstract class BrightActivity<SingletonComponent, MainComponent extends B
         super.onDestroy();
 
         component.lifecycleController().onDestroy();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        return component.lifecycleController().dispatchKeyEvent(event) || super.dispatchKeyEvent(event);
     }
 
     @Override

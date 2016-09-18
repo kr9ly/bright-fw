@@ -3,12 +3,12 @@ package net.kr9ly.brightfw.helper.lifecycle;
 import android.os.Bundle;
 
 import net.kr9ly.brightfw.app.LifecycleController;
-import net.kr9ly.brightfw.dependency.lifecycle.OnCreateCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnDestroyCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnPauseCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnResumeCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnStartCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnStopCallback;
+import net.kr9ly.brightfw.app.callback.OnCreateCallback;
+import net.kr9ly.brightfw.app.callback.OnDestroyCallback;
+import net.kr9ly.brightfw.app.callback.OnPauseCallback;
+import net.kr9ly.brightfw.app.callback.OnResumeCallback;
+import net.kr9ly.brightfw.app.callback.OnStartCallback;
+import net.kr9ly.brightfw.app.callback.OnStopCallback;
 import net.kr9ly.rxstatemachine.RxStateMachine;
 
 import rx.Observable;

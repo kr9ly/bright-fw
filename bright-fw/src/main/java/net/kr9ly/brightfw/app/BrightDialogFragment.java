@@ -1,9 +1,11 @@
 package net.kr9ly.brightfw.app;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.view.KeyEvent;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
 import net.kr9ly.brightfw.helper.dialog.DialogHelper;
@@ -34,6 +36,12 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
         Dialog dialog = super.onCreateDialog(savedInstanceState);
 
         dialog = prepareComponent(savedInstanceState, dialog);
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+                return component.lifecycleController().dispatchKeyEvent(keyEvent);
+            }
+        });
 
         return dialog;
     }
@@ -45,6 +53,7 @@ public abstract class BrightDialogFragment<SingletonComponent, MainComponent ext
         dialog = componentCreated(component, dialog);
 
         component.lifecycleController().onCreate(savedInstanceState);
+        component.lifecycleController().onRestoreInstanceState(savedInstanceState);
 
         return dialog;
     }

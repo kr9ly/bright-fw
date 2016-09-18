@@ -3,8 +3,8 @@ package net.kr9ly.brightfw.driver.cache;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import net.kr9ly.brightfw.dependency.lifecycle.OnCreateCallback;
-import net.kr9ly.brightfw.dependency.lifecycle.OnSaveInstanceStateCallback;
+import net.kr9ly.brightfw.app.callback.OnCreateCallback;
+import net.kr9ly.brightfw.app.callback.OnSaveInstanceStateCallback;
 
 import java.io.Serializable;
 

@@ -3,6 +3,7 @@ package net.kr9ly.brightfw.app;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 
 import net.kr9ly.brightfw.dependency.component.BrightMainComponent;
@@ -40,6 +41,7 @@ public abstract class BrightFragment<SingletonComponent, MainComponent extends B
         componentCreated(component);
 
         component.lifecycleController().onCreate(savedInstanceState);
+        component.lifecycleController().onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
