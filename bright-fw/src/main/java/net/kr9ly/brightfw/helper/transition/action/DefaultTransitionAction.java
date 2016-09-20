@@ -20,8 +20,8 @@ public class DefaultTransitionAction implements ActivityTransitionAction {
 
     @Override
     public void forward(FragmentActivity activity, Intent intent) {
-        animationAction.forward(activity);
         activity.startActivity(intent);
+        animationAction.forward(activity);
     }
 
     @Override

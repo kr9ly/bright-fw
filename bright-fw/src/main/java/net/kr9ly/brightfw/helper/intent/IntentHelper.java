@@ -11,8 +11,8 @@ public class IntentHelper {
         this.context = context;
     }
 
-    public Intent build(Object arguments) {
-        return IntentConverter.buildIntent(context, arguments);
+    public Intent build(IntentBuilder builder) {
+        return builder.build(context);
     }
 
     public <T> T restore(Intent intent, Class<T> argumentsClass) {
