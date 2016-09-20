@@ -101,6 +101,8 @@ public abstract class BrightActivity<SingletonComponent, MainComponent extends B
 
     @Override
     public void finish() {
+        super.finish();
+
         Intent intent = getIntent();
         if (intent != null) {
             ActivityTransitionAction action = (ActivityTransitionAction) intent.getSerializableExtra(TransitionHelper.EXTRA_KEY_TRANSITION_ACTION);
@@ -108,8 +110,6 @@ public abstract class BrightActivity<SingletonComponent, MainComponent extends B
                 action.back(this, intent);
             }
         }
-
-        super.finish();
     }
 
     protected abstract MainComponent buildComponent(SingletonComponent singletonComponent);
