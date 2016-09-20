@@ -18,6 +18,8 @@ public class UriIntentBuilder implements IntentBuilder {
 
     @Override
     public Intent build(Context context) {
-        return new Intent(Intent.ACTION_VIEW, uri);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 }
