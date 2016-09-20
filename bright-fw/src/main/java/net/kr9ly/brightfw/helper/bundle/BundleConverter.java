@@ -2,6 +2,7 @@ package net.kr9ly.brightfw.helper.bundle;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.os.Parcelable;
 
 import net.kr9ly.brightfw.helper.arguments.Argument;
@@ -142,17 +143,17 @@ import java.lang.reflect.Proxy;
                 bundle.putStringArray(keyName, (String[]) value);
             }
         }
-        if (valueType.isAssignableFrom(Bundle.class)) {
+        if (Bundle.class.isAssignableFrom(valueType)) {
             bundle.putBundle(keyName, (Bundle) value);
-        } else if (valueType.isAssignableFrom(Parcelable.class)) {
+        } else if (Parcelable.class.isAssignableFrom(valueType)) {
             bundle.putParcelable(keyName, (Parcelable) value);
-        } else if (valueType.isAssignableFrom(Parcelable[].class)) {
+        } else if (Parcelable[].class.isAssignableFrom(valueType)) {
             bundle.putParcelableArray(keyName, (Parcelable[]) value);
-        } else if (valueType.isAssignableFrom(Serializable.class)) {
+        } else if (Serializable.class.isAssignableFrom(valueType)) {
             bundle.putSerializable(keyName, (Serializable) value);
-        } else if (valueType.isAssignableFrom(CharSequence.class)) {
+        } else if (CharSequence.class.isAssignableFrom(valueType)) {
             bundle.putCharSequence(keyName, (CharSequence) value);
-        } else if (valueType.isAssignableFrom(CharSequence[].class)) {
+        } else if (CharSequence[].class.isAssignableFrom(valueType)) {
             bundle.putCharSequenceArray(keyName, (CharSequence[]) value);
         }
     }
@@ -200,17 +201,17 @@ import java.lang.reflect.Proxy;
                 return bundle.getStringArray(keyName);
             }
         }
-        if (valueType.isAssignableFrom(Bundle.class)) {
+        if (Bundle.class.isAssignableFrom(valueType)) {
             return bundle.getBundle(keyName);
-        } else if (valueType.isAssignableFrom(Parcelable.class)) {
+        } else if (Parcelable.class.isAssignableFrom(valueType)) {
             return bundle.getParcelable(keyName);
-        } else if (valueType.isAssignableFrom(Parcelable[].class)) {
+        } else if (Parcelable[].class.isAssignableFrom(valueType)) {
             return bundle.getParcelableArray(keyName);
-        } else if (valueType.isAssignableFrom(Serializable.class)) {
+        } else if (Serializable.class.isAssignableFrom(valueType)) {
             return bundle.getSerializable(keyName);
-        } else if (valueType.isAssignableFrom(CharSequence.class)) {
+        } else if (CharSequence.class.isAssignableFrom(valueType)) {
             return bundle.getCharSequence(keyName);
-        } else if (valueType.isAssignableFrom(CharSequence[].class)) {
+        } else if (CharSequence[].class.isAssignableFrom(valueType)) {
             return bundle.getCharSequenceArray(keyName);
         }
         return null;

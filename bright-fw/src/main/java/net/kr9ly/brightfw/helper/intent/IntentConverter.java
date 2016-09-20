@@ -145,17 +145,17 @@ import java.lang.reflect.Proxy;
                 intent.putExtra(keyName, (String[]) value);
             }
         }
-        if (valueType.isAssignableFrom(Bundle.class)) {
+        if (Bundle.class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (Bundle) value);
-        } else if (valueType.isAssignableFrom(Parcelable.class)) {
+        } else if (Parcelable.class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (Parcelable) value);
-        } else if (valueType.isAssignableFrom(Parcelable[].class)) {
+        } else if (Parcelable[].class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (Parcelable[]) value);
-        } else if (valueType.isAssignableFrom(Serializable.class)) {
+        } else if (Serializable.class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (Serializable) value);
-        } else if (valueType.isAssignableFrom(CharSequence.class)) {
+        } else if (CharSequence.class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (CharSequence) value);
-        } else if (valueType.isAssignableFrom(CharSequence[].class)) {
+        } else if (CharSequence[].class.isAssignableFrom(valueType)) {
             intent.putExtra(keyName, (CharSequence[]) value);
         }
     }
@@ -203,17 +203,17 @@ import java.lang.reflect.Proxy;
                 return intent.getStringArrayExtra(keyName);
             }
         }
-        if (valueType.isAssignableFrom(Bundle.class)) {
+        if (Bundle.class.isAssignableFrom(valueType)) {
             return intent.getBundleExtra(keyName);
-        } else if (valueType.isAssignableFrom(Parcelable.class)) {
+        } else if (Parcelable.class.isAssignableFrom(valueType)) {
             return intent.getParcelableExtra(keyName);
-        } else if (valueType.isAssignableFrom(Parcelable[].class)) {
+        } else if (Parcelable[].class.isAssignableFrom(valueType)) {
             return intent.getParcelableArrayExtra(keyName);
-        } else if (valueType.isAssignableFrom(Serializable.class)) {
+        } else if (Serializable.class.isAssignableFrom(valueType)) {
             return intent.getSerializableExtra(keyName);
-        } else if (valueType.isAssignableFrom(CharSequence.class)) {
+        } else if (CharSequence.class.isAssignableFrom(valueType)) {
             return intent.getCharSequenceExtra(keyName);
-        } else if (valueType.isAssignableFrom(CharSequence[].class)) {
+        } else if (CharSequence[].class.isAssignableFrom(valueType)) {
             return intent.getCharSequenceArrayExtra(keyName);
         }
         return null;
