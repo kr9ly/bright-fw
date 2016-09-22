@@ -43,7 +43,7 @@ public class OkHttpDriver {
                 try {
                     return call.execute();
                 } catch (IOException e) {
-                    throw new ExecutionException(e);
+                    return null;
                 }
             }
 
@@ -56,7 +56,7 @@ public class OkHttpDriver {
                 try {
                     return call.execute();
                 } catch (IOException e) {
-                    throw new ExecutionException(e);
+                    return null;
                 }
             }
         });
