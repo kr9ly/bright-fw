@@ -2,6 +2,7 @@ package net.kr9ly.brightfw.dependency.module.helper;
 
 import net.kr9ly.brightfw.dependency.module.helper.transition.TransitionHelperDelegate;
 import net.kr9ly.brightfw.dependency.scope.MainScope;
+import net.kr9ly.brightfw.helper.hook.HookHelper;
 import net.kr9ly.brightfw.helper.intent.IntentHelper;
 import net.kr9ly.brightfw.helper.transition.TransitionHelper;
 
@@ -20,8 +21,9 @@ public class TransitionHelperModule {
     @MainScope
     @Provides
     TransitionHelper transitionHelper(
+            HookHelper hookHelper,
             IntentHelper intentHelper
     ) {
-        return delegate.transitionHelper(intentHelper);
+        return delegate.transitionHelper(hookHelper, intentHelper);
     }
 }

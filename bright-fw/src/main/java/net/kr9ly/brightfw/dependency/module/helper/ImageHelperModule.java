@@ -2,6 +2,7 @@ package net.kr9ly.brightfw.dependency.module.helper;
 
 import net.kr9ly.brightfw.dependency.module.helper.image.ImageHelperDelegate;
 import net.kr9ly.brightfw.dependency.scope.MainScope;
+import net.kr9ly.brightfw.helper.hook.HookHelper;
 import net.kr9ly.brightfw.helper.image.ImageHelper;
 
 import dagger.Module;
@@ -18,7 +19,7 @@ public class ImageHelperModule {
 
     @MainScope
     @Provides
-    ImageHelper imageHelper() {
-        return delegate.imageHelper();
+    ImageHelper imageHelper(HookHelper hookHelper) {
+        return delegate.imageHelper(hookHelper);
     }
 }

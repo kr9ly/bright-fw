@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import net.kr9ly.brightfw.helper.bundle.BundleHelper;
 import net.kr9ly.brightfw.helper.dialog.ActivityDialogHelper;
 import net.kr9ly.brightfw.helper.dialog.DialogHelper;
+import net.kr9ly.brightfw.helper.hook.HookHelper;
 
 public class ActivityDialogHelperDelegate implements DialogHelperDelegate {
 
@@ -15,7 +16,7 @@ public class ActivityDialogHelperDelegate implements DialogHelperDelegate {
     }
 
     @Override
-    public DialogHelper dialogHelper(BundleHelper bundleHelper) {
-        return new ActivityDialogHelper(activity, bundleHelper);
+    public DialogHelper dialogHelper(HookHelper hookHelper, BundleHelper bundleHelper) {
+        return new ActivityDialogHelper(hookHelper, activity, bundleHelper);
     }
 }

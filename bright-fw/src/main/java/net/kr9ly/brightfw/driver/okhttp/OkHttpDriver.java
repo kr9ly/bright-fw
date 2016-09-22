@@ -1,5 +1,8 @@
 package net.kr9ly.brightfw.driver.okhttp;
 
+import net.kr9ly.brightfw.helper.hook.Hook;
+import net.kr9ly.brightfw.helper.hook.HookHelper;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -13,6 +16,12 @@ import okhttp3.Response;
 import rx.Observable;
 
 public class OkHttpDriver {
+
+    private Hook hook;
+
+    public OkHttpDriver(HookHelper hook) {
+        this.hook = hook.of(getClass());
+    }
 
     public Observable<Response> request(final OkHttpClient client, final Request request) {
         return Observable.from(new Future<Response>() {
@@ -40,8 +49,11 @@ public class OkHttpDriver {
             @Override
             public Response get() throws InterruptedException, ExecutionException {
                 call = client.newCall(request);
+                hook.hook("start_request", call);
                 try {
-                    return call.execute();
+                    Response response = call.execute();
+                    hook.hook("finish_request", response);
+                    return response;
                 } catch (IOException e) {
                     return null;
                 }
@@ -53,8 +65,11 @@ public class OkHttpDriver {
                         .connectTimeout(l, timeUnit)
                         .build()
                         .newCall(request);
+                hook.hook("start_request", call);
                 try {
-                    return call.execute();
+                    Response response = call.execute();
+                    hook.hook("finish_request", response);
+                    return response;
                 } catch (IOException e) {
                     return null;
                 }

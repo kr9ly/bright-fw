@@ -2,6 +2,7 @@ package net.kr9ly.brightfw.dependency.module.helper.transition;
 
 import android.support.v4.app.FragmentActivity;
 
+import net.kr9ly.brightfw.helper.hook.HookHelper;
 import net.kr9ly.brightfw.helper.intent.IntentHelper;
 import net.kr9ly.brightfw.helper.transition.ActivityTransitionHelper;
 import net.kr9ly.brightfw.helper.transition.TransitionHelper;
@@ -15,7 +16,7 @@ public class ActivityTransitionHelperDelegate implements TransitionHelperDelegat
     }
 
     @Override
-    public TransitionHelper transitionHelper(IntentHelper intentHelper) {
-        return new ActivityTransitionHelper(activity, intentHelper);
+    public TransitionHelper transitionHelper(HookHelper hookHelper, IntentHelper intentHelper) {
+        return new ActivityTransitionHelper(hookHelper, activity, intentHelper);
     }
 }

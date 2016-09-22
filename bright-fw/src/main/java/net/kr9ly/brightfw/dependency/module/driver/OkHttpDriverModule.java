@@ -4,6 +4,7 @@ import net.kr9ly.brightfw.dependency.scope.SingletonScope;
 import net.kr9ly.brightfw.driver.okhttp.DefaultOkHttpClientBuilder;
 import net.kr9ly.brightfw.driver.okhttp.OkHttpClientBuilder;
 import net.kr9ly.brightfw.driver.okhttp.OkHttpDriver;
+import net.kr9ly.brightfw.helper.hook.HookHelper;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,8 +25,10 @@ public class OkHttpDriverModule {
 
     @SingletonScope
     @Provides
-    OkHttpDriver okHttpDriver() {
-        return new OkHttpDriver();
+    OkHttpDriver okHttpDriver(
+            HookHelper hookHelper
+    ) {
+        return new OkHttpDriver(hookHelper);
     }
 
     @SingletonScope
