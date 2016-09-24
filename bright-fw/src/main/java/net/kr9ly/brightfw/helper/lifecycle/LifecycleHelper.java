@@ -1,15 +1,20 @@
 package net.kr9ly.brightfw.helper.lifecycle;
 
+import net.kr9ly.brightfw.dependency.scope.MainScope;
 import net.kr9ly.rxstatemachine.RxStateBinder;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 
+@MainScope
 public class LifecycleHelper {
 
     private LifecycleStateMachine stateMachine;
 
     private RxStateBinder<LifecycleState> binder;
 
+    @Inject
     public LifecycleHelper(LifecycleStateMachine stateMachine) {
         binder = new RxStateBinder<>(stateMachine);
     }

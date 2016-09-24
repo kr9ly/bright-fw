@@ -2,6 +2,7 @@ package net.kr9ly.brightfw.hook.log;
 
 import android.util.Log;
 
+import net.kr9ly.brightfw.dependency.scope.SingletonScope;
 import net.kr9ly.brightfw.helper.hook.HookCallback;
 import net.kr9ly.brightfw.helper.hook.HookHelper;
 
@@ -9,6 +10,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.inject.Inject;
+
+@SingletonScope
 public class LogHook {
 
     private LogLevel defaultLogLevel = LogLevel.DEBUG;
@@ -17,6 +21,7 @@ public class LogHook {
 
     private LogLevel forceLevel;
 
+    @Inject
     public LogHook(HookHelper hookHelper) {
         hookHelper.addHook(new HookCallback() {
             @Override

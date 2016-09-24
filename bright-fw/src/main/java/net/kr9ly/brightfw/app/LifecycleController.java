@@ -12,10 +12,14 @@ import net.kr9ly.brightfw.app.callback.OnResumeCallback;
 import net.kr9ly.brightfw.app.callback.OnSaveInstanceStateCallback;
 import net.kr9ly.brightfw.app.callback.OnStartCallback;
 import net.kr9ly.brightfw.app.callback.OnStopCallback;
+import net.kr9ly.brightfw.dependency.scope.MainScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+@MainScope
 public class LifecycleController {
 
     private final List<OnCreateCallback> onCreateCallbacks = new ArrayList<>();
@@ -35,6 +39,11 @@ public class LifecycleController {
     private final List<OnRestoreInstanceStateCallback> onRestoreInstanceStateCallbacks = new ArrayList<>();
 
     private final List<DispatchKeyEventCallback> dispatchKeyEventCallbacks = new ArrayList<>();
+
+    @Inject
+    public LifecycleController() {
+
+    }
 
     public void register(Object callbacks) {
         if (callbacks instanceof OnCreateCallback) {

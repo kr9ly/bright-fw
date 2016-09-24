@@ -1,11 +1,21 @@
 package net.kr9ly.brightfw.helper.hook;
 
+import net.kr9ly.brightfw.dependency.scope.SingletonScope;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+@SingletonScope
 public class HookHelper {
 
     private List<HookCallback> callbacks = new ArrayList<>();
+
+    @Inject
+    public HookHelper() {
+
+    }
 
     public void addHook(HookCallback callback) {
         callbacks.add(callback);

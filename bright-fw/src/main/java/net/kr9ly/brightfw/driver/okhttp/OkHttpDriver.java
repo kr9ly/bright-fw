@@ -1,5 +1,6 @@
 package net.kr9ly.brightfw.driver.okhttp;
 
+import net.kr9ly.brightfw.dependency.scope.SingletonScope;
 import net.kr9ly.brightfw.helper.hook.Hook;
 import net.kr9ly.brightfw.helper.hook.HookHelper;
 
@@ -9,16 +10,20 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import javax.inject.Inject;
+
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import rx.Observable;
 
+@SingletonScope
 public class OkHttpDriver {
 
     private Hook hook;
 
+    @Inject
     public OkHttpDriver(HookHelper hook) {
         this.hook = hook.of(getClass());
     }

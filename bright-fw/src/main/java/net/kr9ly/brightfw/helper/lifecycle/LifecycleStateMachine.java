@@ -9,12 +9,16 @@ import net.kr9ly.brightfw.app.callback.OnPauseCallback;
 import net.kr9ly.brightfw.app.callback.OnResumeCallback;
 import net.kr9ly.brightfw.app.callback.OnStartCallback;
 import net.kr9ly.brightfw.app.callback.OnStopCallback;
+import net.kr9ly.brightfw.dependency.scope.MainScope;
 import net.kr9ly.rxstatemachine.RxStateMachine;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
 
+@MainScope
 public class LifecycleStateMachine extends RxStateMachine<LifecycleState> implements
         OnCreateCallback,
         OnStartCallback,
@@ -22,6 +26,8 @@ public class LifecycleStateMachine extends RxStateMachine<LifecycleState> implem
         OnPauseCallback,
         OnStopCallback,
         OnDestroyCallback {
+
+    @Inject
     public LifecycleStateMachine(
             LifecycleController lifecycleController
     ) {

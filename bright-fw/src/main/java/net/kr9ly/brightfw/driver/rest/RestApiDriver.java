@@ -4,6 +4,7 @@ import net.kr9ly.brightfw.driver.okhttp.OkHttpDriver;
 
 import okhttp3.OkHttpClient;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 
@@ -65,7 +66,12 @@ public class RestApiDriver<Request, Response, Error> {
                         return response != null;
                     }
                 })
-                .doOnEach(responseSubject);
+                .doOnNext(new Action1<Response>() {
+                    @Override
+                    public void call(Response response) {
+                        responseSubject.onNext(response);
+                    }
+                });
     }
 
     public Observable<Response> responseObservable() {

@@ -25,14 +25,6 @@ public class OkHttpDriverModule {
 
     @SingletonScope
     @Provides
-    OkHttpDriver okHttpDriver(
-            HookHelper hookHelper
-    ) {
-        return new OkHttpDriver(hookHelper);
-    }
-
-    @SingletonScope
-    @Provides
     OkHttpClient okHttpClient() {
         return builder.build();
     }

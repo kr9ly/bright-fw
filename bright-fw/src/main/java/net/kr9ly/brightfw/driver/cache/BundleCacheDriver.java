@@ -5,14 +5,18 @@ import android.os.Parcelable;
 
 import net.kr9ly.brightfw.app.callback.OnCreateCallback;
 import net.kr9ly.brightfw.app.callback.OnSaveInstanceStateCallback;
+import net.kr9ly.brightfw.dependency.scope.MainScope;
 
 import java.io.Serializable;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
 
+@MainScope
 public class BundleCacheDriver implements OnCreateCallback, OnSaveInstanceStateCallback {
 
     private final String bundleName;
@@ -21,6 +25,7 @@ public class BundleCacheDriver implements OnCreateCallback, OnSaveInstanceStateC
 
     private final Subject<String, String> updateQueue = new SerializedSubject<>(PublishSubject.<String>create());
 
+    @Inject
     public BundleCacheDriver(BundleCacheSettings settings) {
         this.bundleName = settings.bundleName();
     }

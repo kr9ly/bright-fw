@@ -13,7 +13,7 @@ jcenter()
 And Add this to `dependencies` block in your build.gradle
 
 ```
-compile 'net.kr9ly:bright-fw:0.18.0'
+compile 'net.kr9ly:bright-fw:0.19.0'
 ```
 
 # Usage
