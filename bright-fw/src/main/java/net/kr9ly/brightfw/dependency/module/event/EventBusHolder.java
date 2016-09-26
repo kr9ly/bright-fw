@@ -13,6 +13,10 @@ public class EventBusHolder {
     private WeakHashMap<Object, RxEventBus> cache = new WeakHashMap<>();
 
     @Inject
+    public EventBusHolder() {
+
+    }
+
     public RxEventBus findOrCreate(Object target, Object parent) {
         RxEventBus bus = cache.get(target);
         if (bus == null) {
