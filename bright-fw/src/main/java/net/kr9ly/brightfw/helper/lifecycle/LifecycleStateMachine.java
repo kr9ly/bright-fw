@@ -37,28 +37,39 @@ public class LifecycleStateMachine extends RxStateMachine<LifecycleState> implem
     }
 
     public Observable<Class<? extends LifecycleState>> onTransitionObservable(final Class<? extends LifecycleState> enter, final Class<? extends LifecycleState> exit) {
-        return Observable.zip(
-                enterObservable()
-                        .filter(new Func1<Class<? extends LifecycleState>, Boolean>() {
-                            @Override
-                            public Boolean call(Class<? extends LifecycleState> state) {
-                                return state == enter;
-                            }
-                        }),
-                exitObservable()
-                        .filter(new Func1<Class<? extends LifecycleState>, Boolean>() {
-                            @Override
-                            public Boolean call(Class<? extends LifecycleState> state) {
-                                return state == exit;
-                            }
-                        }),
-                new Func2<Class<? extends LifecycleState>, Class<? extends LifecycleState>, Class<? extends LifecycleState>>() {
+        return exitObservable()
+                .filter(new Func1<Class<? extends LifecycleState>, Boolean>() {
                     @Override
-                    public Class<? extends LifecycleState> call(Class<? extends LifecycleState> enter, Class<? extends LifecycleState> exit) {
+                    public Boolean call(Class<? extends LifecycleState> state) {
+                        return state == exit;
+                    }
+                })
+                .flatMap(new Func1<Class<? extends LifecycleState>, Observable<Class<? extends LifecycleState>>>() {
+                    @Override
+                    public Observable<Class<? extends LifecycleState>> call(Class<? extends LifecycleState> aClass) {
+                        return enterObservable()
+                                .filter(new Func1<Class<? extends LifecycleState>, Boolean>() {
+                                    @Override
+                                    public Boolean call(Class<? extends LifecycleState> state) {
+                                        return state == enter;
+                                    }
+                                })
+                                .takeUntil(
+                                        exitObservable()
+                                                .filter(new Func1<Class<? extends LifecycleState>, Boolean>() {
+                                                    @Override
+                                                    public Boolean call(Class<? extends LifecycleState> state) {
+                                                        return state == exit;
+                                                    }
+                                                }));
+                    }
+                })
+                .map(new Func1<Class<? extends LifecycleState>, Class<? extends LifecycleState>>() {
+                    @Override
+                    public Class<? extends LifecycleState> call(Class<? extends LifecycleState> aClass) {
                         return enter;
                     }
-                }
-        );
+                });
     }
 
     public Observable<Class<? extends LifecycleState>> onCreateObservable() {
