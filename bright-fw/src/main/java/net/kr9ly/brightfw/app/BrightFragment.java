@@ -48,12 +48,20 @@ public abstract class BrightFragment<SingletonComponent, MainComponent extends B
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        if (component == null) {
+            return;
+        }
+
         component.lifecycleController().onSaveInstanceState(outState);
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+        if (component == null) {
+            return;
+        }
 
         component.lifecycleController().onStart();
     }
@@ -62,12 +70,20 @@ public abstract class BrightFragment<SingletonComponent, MainComponent extends B
     public void onResume() {
         super.onResume();
 
+        if (component == null) {
+            return;
+        }
+
         component.lifecycleController().onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        if (component == null) {
+            return;
+        }
 
         component.lifecycleController().onPause();
     }
@@ -76,12 +92,20 @@ public abstract class BrightFragment<SingletonComponent, MainComponent extends B
     public void onStop() {
         super.onStop();
 
+        if (component == null) {
+            return;
+        }
+
         component.lifecycleController().onStop();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        if (component == null) {
+            return;
+        }
 
         component.lifecycleController().onDestroy();
     }
